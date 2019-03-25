@@ -1,0 +1,192 @@
+<?php
+
+session_start();
+$db=mysqli_connect("localhost","root","","authentication");
+
+if(isset($_POST['register_btn'])){
+
+	$username=$_POST['register_btn'];
+	$email=$_POST['email'];
+	$password=$_POST['password'];
+	$password2=$_POST['password2'];
+	if($password==$password2){
+//create user
+$password=md5($password);  //hash passwword before storing for the security purpose
+$sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$password')";
+mysqli_query($db,$sql);
+$_SESSION['message']="sucessfully Loged in!";
+$_SESSION['username']=$username;
+header("location:abchome.php");  //redirect to home page
+
+	}
+	else{
+//fail
+$_SESSION['message']="Password not Confirmed";
+	}
+
+}
+
+?>
+
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+<style type="text/css">
+	
+	body{
+background-image:linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)), url("BL12_Banking.jpg");
+	height: 100vh;
+	background-position: center;
+	background-size: cover;
+	background-repeat: no-repeat;
+}
+
+#login{
+
+	background-color: #0d0d0d;
+	min-height: 400px;
+	opacity: 0.70;
+	padding: 30px 50px 30px 50px;
+	box-shadow: -3px -3px 3px #33cc33;
+}
+
+
+#iconn{
+background-color: #5cb85c;
+border-color:#4cae4c;
+color: white;
+
+}
+.user{
+	
+	font-size: 14px;
+	color: white;
+
+}
+
+
+#login-name{
+	font-size: 27px;
+	font-family: "Lucida Console";
+	color: white;
+}
+
+
+</style>
+
+
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<!-- Latest compiled JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+	
+
+
+
+</head>
+<body>
+
+
+<nav  class="navbar navbar-inverse">
+	<div class="container-fluid">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#">Banking</a>
+		</div>
+	<ul class="nav navbar-nav">
+	<li class="active"><a href="#">Home</a></li>	
+	<li><a href="#">News</a></li>		
+	<	<li><a href="#">Send/Receive</a></li>	
+	<li><a href="#">My Transactions</a></li>	
+	<li><a href="#">Transfer Funds</a></li>	
+<li><a href="#">Contact</a></li>	
+	<li><a href="#">About us</a></li>
+
+	</ul>
+</div>
+
+</nav>
+
+
+<div class="container">
+	<br/><br/><br/><br/>
+	<center><b id="login-name">Signup</b></center>
+	<center>
+<div class="row">
+	<div class="col-md-3 col-md-offset-5" id="login">
+		
+<form  method="post" action="#">
+	<div class="form-group">
+		<label class="user">Username</label>
+		<div class="input-group">
+			<span class="input-group-addon"  id="iconn"> 
+				<i class="glyphicon glyphicon-user"></i></span>
+
+				<input type="text"  class="form-control" name="t1" placeholder="Enterusername">
+
+		
+		</div>
+
+
+
+<label class="user">Email</label>
+		<div class="input-group">
+			<span class="input-group-addon"  id="iconn"> 
+				<i class="glyphicon glyphicon-user"></i></span>
+
+				<input type="email"  class="form-control" name="email" placeholder="email">
+				
+		
+		</div>
+
+
+
+<label class="user">Password</label>
+		<div class="input-group">
+			<span class="input-group-addon"  id="iconn"> 
+				<i class="glyphicon glyphicon-user"></i></span>
+
+				<input type="Password"  class="form-control" name="password" placeholder="password">
+		</div>
+
+
+
+
+
+<label class="user">ConfirmPassword</label>
+		<div class="input-group">
+			<span class="input-group-addon"  id="iconn"> 
+				<i class="glyphicon glyphicon-user"></i></span>
+
+				<input type="Password"  class="form-control" name="password2" placeholder="password">
+				
+</div>
+
+
+
+
+
+		<div class="input-group">
+			<span class="input-group-addon"  id="iconn"> 
+				<i class="glyphicon glyphicon-user"></i></span>
+<br/>
+				<input type="submit"  class="form-control" name="register_btn" value="submit">
+				
+</div>
+
+	</div>
+
+</center>
+
+
+
+
+</body>
+</html>
