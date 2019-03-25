@@ -1,32 +1,4 @@
-<?php
 
-session_start();
-$db=mysqli_connect("localhost","root","","authentication");
-
-if(isset($_POST['register_btn'])){
-
-	$username=$_POST['register_btn'];
-	$email=$_POST['email'];
-	$password=$_POST['password'];
-	$password2=$_POST['password2'];
-	if($password==$password2){
-//create user
-$password=md5($password);  //hash passwword before storing for the security purpose
-$sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$password')";
-mysqli_query($db,$sql);
-$_SESSION['message']="sucessfully Loged in!";
-$_SESSION['username']=$username;
-header("location:abchome.php");  //redirect to home page
-
-	}
-	else{
-//fail
-$_SESSION['message']="Password not Confirmed";
-	}
-
-}
-
-?>
 
 
 
