@@ -175,6 +175,36 @@ $(".reveal").on('click',function() {
     }
 });
 
+	
+	
+	
+<?php
+
+$con=mysqli_connect("localhost","root","","authentication");
+
+if(isset($_POST['register_btn'])){
+$email=$_POST['email'];
+$password=$_POST['password'];
+
+	$query="select * from users where email= '$email' && password='$password'";
+	$result=mysqli_query($con,$query);
+	if(mysqli_fetch_assoc($result)){
+	header("location:home.php");
+	}
+	else{
+		echo "not a valid user";
+		header("location:register.php");
+	}
+
+
+}
+
+
+
+?>
+	
+	
+	
 
 $(".reveal2").on('click',function() {
     var $pwd2 = $(".pwd2");
