@@ -1,25 +1,3 @@
-<?php
-
-$db=mysqli_connect("localhost","root","","authentication");
-
-if(isset($_POST['register_btn'])){
-
-	$username=$_POST['username'];
-	$email=$_POST['email'];
-	$password=$_POST['password'];
-	$password2=$_POST['password2'];
-
-	if($password==$password2){
-
-$sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$password')";
-mysqli_query($db,$sql);
-
-	}
-
-
-}
-
-?>
 
 
 
@@ -201,7 +179,31 @@ $(".reveal").on('click',function() {
     }
 });
 
+<?php
 
+$db=mysqli_connect("localhost","root","","authentication");
+
+if(isset($_POST['register_btn'])){
+
+	$username=$_POST['username'];
+	$email=$_POST['email'];
+	$password=$_POST['password'];
+	$password2=$_POST['password2'];
+
+	if($password==$password2){
+
+$sql="INSERT INTO users(username,email,password) VALUES ('$username','$email','$password')";
+mysqli_query($db,$sql);
+
+	}
+
+
+}
+
+?>
+
+	
+	
 $(".reveal2").on('click',function() {
     var $pwd2 = $(".pwd2");
     if ($pwd2.attr('type') === 'password') {
